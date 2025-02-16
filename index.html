@@ -3,30 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Submission</title>
+    <title>Daily Sales Report - Heaven's Kitchen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            text-align: center;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+        }
+        select, input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkgreen;
+        }
+    </style>
 </head>
 <body>
-    <form id="dataForm">
-        <select id="option">
-            <option value="Option A">Option A</option>
-            <option value="Option B">Option B</option>
+
+    <h2>Daily Sales Report - Heaven's Kitchen</h2>
+    
+    <form id="salesForm">
+        <!-- Staff Name Dropdown -->
+        <label for="staffName">Staff Name (Required)</label>
+        <select id="staffName" required>
+            <option value="" disabled selected>Select Staff</option>
+            <option value="Sumon">Sumon</option>
+            <option value="Shuvo">Shuvo</option>
+            <option value="Shadin">Shadin</option>
+            <option value="Roni 2">Roni 2</option>
+            <option value="Limon">Limon</option>
+            <option value="Asmaul">Asmaul</option>
+            <option value="Ontor">Ontor</option>
+            <option value="Mainul">Mainul</option>
         </select>
-        <input type="text" id="input1" placeholder="Enter Text or Number">
-        <input type="text" id="input2" placeholder="Additional Input">
-        <button type="submit">Submit</button>
+
+        <!-- Number of Customers -->
+        <label for="numCustomers">Number of Customers (Required)</label>
+        <input type="number" id="numCustomers" placeholder="Enter number of customers" required>
+
+        <!-- Total Sold Amount -->
+        <label for="totalSold">Total Sold Amount (Required)</label>
+        <input type="number" id="totalSold" placeholder="Enter total sold amount" required>
+
+        <!-- Total Paid Amount -->
+        <label for="totalPaid">Total Paid Amount (Required)</label>
+        <input type="number" id="totalPaid" placeholder="Enter total paid amount" required>
+
+        <!-- Most Sold Item Dropdown -->
+        <label for="mostSoldItem">Most Sold Item (Required)</label>
+        <select id="mostSoldItem" required>
+            <option value="" disabled selected>Select Most Sold Item</option>
+            <option value="biryani">Biryani</option>
+            <option value="kacchi">Kacchi</option>
+            <option value="Beef Curry">Beef Curry</option>
+            <option value="Meat Curry">Meat Curry</option>
+            <option value="Burger">Burger</option>
+            <option value="Pizza">Pizza</option>
+            <option value="Barista">Barista</option>
+            <option value="Chicken Biryani">Chicken Biryani</option>
+            <option value="Mutton Biryani">Mutton Biryani</option>
+            <option value="Sweets">Sweets</option>
+        </select>
+
+        <!-- Additional Remarks -->
+        <label for="remarks">Additional Remarks (Optional)</label>
+        <textarea id="remarks" placeholder="Any extra comments..."></textarea>
+
+        <!-- Submit Button -->
+        <button type="submit">Submit Report</button>
     </form>
 
     <script>
-        document.getElementById("dataForm").addEventListener("submit", function(event) {
+        document.getElementById("salesForm").addEventListener("submit", function(event) {
             event.preventDefault();
             
             let formData = {
-                option: document.getElementById("option").value,
-                input1: document.getElementById("input1").value,
-                input2: document.getElementById("input2").value
+                staffName: document.getElementById("staffName").value,
+                numCustomers: document.getElementById("numCustomers").value,
+                totalSold: document.getElementById("totalSold").value,
+                totalPaid: document.getElementById("totalPaid").value,
+                mostSoldItem: document.getElementById("mostSoldItem").value,
+                remarks: document.getElementById("remarks").value
             };
 
-            fetch("https://script.google.com/macros/s/AKfycbzctx8eKekcL2JkkE8l87wHOTtqIaNFUBOE2-RtkkoE0rMo_HlMaD2PZqP52ocKq2jzdg/exec", {
+            fetch("https://script.google.com/macros/s/AKfycbx8jM3rXjqxjJFIRg4mFWhXYMafjx_pJw9PWdQKnMjXKF-rF-uq58bz4JL9uSwD6Ant-Q/exec", {
                 method: "POST",
                 mode: "no-cors",
                 headers: {
@@ -34,9 +117,10 @@
                 },
                 body: JSON.stringify(formData)
             })
-            .then(() => alert("Data submitted successfully!"))
+            .then(() => alert("Sales report submitted successfully!"))
             .catch(error => alert("Error: " + error));
         });
     </script>
+
 </body>
 </html>
