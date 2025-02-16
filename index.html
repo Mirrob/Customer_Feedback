@@ -1,79 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Form to Google Sheet</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    .form-container {
-      max-width: 400px;
-      margin: 0 auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      background-color: #f9f9f9;
-    }
-    .form-container label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-    }
-    .form-container input, .form-container select {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    .form-container button {
-      width: 100%;
-      padding: 10px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .form-container button:hover {
-      background-color: #45a049;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Submission</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        form { max-width: 400px; margin: auto; background: #f4f4f4; padding: 20px; border-radius: 8px; }
+        select, input, button { width: 100%; padding: 10px; margin: 10px 0; }
+        button { background: #28a745; color: white; border: none; }
+    </style>
 </head>
 <body>
-  <div class="form-container">
-    <h2>Submit Data to Google Sheet</h2>
-    <form id="myForm">
-      <label for="dropdown">Select an option:</label>
-      <select id="dropdown" name="dropdown" required>
-        <option value="Option A">Option A</option>
-        <option value="Option B">Option B</option>
-        <option value="Option C">Option C</option>
-      </select>
 
-      <label for="input1">Input Field 1:</label>
-      <input type="text" id="input1" name="input1" placeholder="Enter text or number" required>
+    <h2>Submit Data</h2>
+    <form id="dataForm">
+        <label for="option">Choose an option:</label>
+        <select id="option">
+            <option value="Option A">Option A</option>
+            <option value="Option B">Option B</option>
+            <option value="Option C">Option C</option>
+        </select>
 
-      <label for="input2">Input Field 2 (Bangla/English):</label>
-      <input type="text" id="input2" name="input2" placeholder="Enter text in Bangla or English" required>
+        <label for="input1">Enter Text or Number:</label>
+        <input type="text" id="input1" placeholder="Type here...">
 
-      <button type="submit">Submit</button>
+        <label for="input2">Additional Input:</label>
+        <input type="text" id="input2" placeholder="More details...">
+
+        <button type="button" onclick="submitData()">Submit</button>
     </form>
-  </div>
 
-  <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwpFuIZiidb4A8DuzPue2tYX6qyj6oQql8lw4n6DSo5MdEMPazDhLRIQtqyXneVn5Oz/exec'; // Replace with your Google Apps Script URL
-    const form = document.getElementById('myForm');
+    <p id="response"></p>
 
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-        .then(response => alert('Data submitted successfully!'))
-        .catch(error => console.error('Error!', error.message));
-    });
-  </script>
+    <script>
+        function submitData() {
+            var option = document.getElementById("option").value;
+            var input1 = document.getElementById("input1").value;
+            var input2 = document.getElementById("input2").value;
+
+            if (input1.trim() === "" || input2.trim() === "") {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            fetch("https://script.google.com/macros/s/AKfycbyvMlNTNi9HO957DKmKGSkS6jRB0hC2Qea2h1dKTPsAO51FBrDlLt3_UlLPpb1HRzUv/exec", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ option, input1, input2 })
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("response").innerText = "Submitted Successfully!";
+                document.getElementById("dataForm").reset();
+            })
+            .catch(error => alert("Error: " + error));
+        }
+    </script>
+
 </body>
 </html>
