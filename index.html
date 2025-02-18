@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Sales Report - Heaven's Kitchen</title>
+    <title>Customer Feedback - Heaven's Kitchen</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 400px;
+            background-color: #ffefcc;
+            max-width: 600px;
             margin: auto;
             padding: 20px;
-            background-color: #f4f4f4;
         }
         h2 {
             text-align: center;
@@ -31,85 +31,115 @@
             margin-bottom: 10px;
         }
         button {
-            background-color: green;
+            background-color: #d2691e;
             color: white;
             border: none;
             cursor: pointer;
         }
         button:hover {
-            background-color: darkgreen;
+            background-color: #8b4513;
         }
     </style>
 </head>
 <body>
 
-    <h2>Daily Sales Report - Heaven's Kitchen</h2>
+    <h2 id="form-title">Customer Feedback - Heaven's Kitchen</h2>
     
-    <form id="salesForm">
-        <!-- Staff Name Dropdown -->
-        <label for="staffName">Staff Name (Required)</label>
-        <select id="staffName" required>
-            <option value="" disabled selected>Select Staff</option>
-            <option value="Sumon">Sumon</option>
-            <option value="Shuvo">Shuvo</option>
-            <option value="Shadin">Shadin</option>
-            <option value="Roni 2">Roni 2</option>
-            <option value="Limon">Limon</option>
-            <option value="Asmaul">Asmaul</option>
-            <option value="Ontor">Ontor</option>
-            <option value="Mainul">Mainul</option>
+    <div>
+        <label for="language">Select Language:</label>
+        <select id="language" onchange="toggleLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="bn">বাংলা</option>
+        </select>
+    </div>
+    
+    <form id="feedbackForm">
+        <label for="name" id="label-name">Your Name (Required)</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="contact" id="label-contact">Phone Number (Required)</label>
+        <input type="text" id="contact" name="contact" required>
+
+        <label for="email" id="label-email">Email Address (Optional)</label>
+        <input type="email" id="email" name="email">
+
+        <label for="rating" id="label-rating">How would you rate your overall dining experience today?</label>
+        <select id="rating" name="rating" required>
+            <option value="">Select Rating</option>
+            <option value="Excellent">Excellent</option>
+            <option value="Good">Good</option>
+            <option value="Average">Average</option>
+            <option value="Poor">Poor</option>
+            <option value="Very Poor">Very Poor</option>
         </select>
 
-        <!-- Number of Customers -->
-        <label for="numCustomers">Number of Customers (Required)</label>
-        <input type="number" id="numCustomers" placeholder="Enter number of customers" required>
-
-        <!-- Total Sold Amount -->
-        <label for="totalSold">Total Sold Amount (Required)</label>
-        <input type="number" id="totalSold" placeholder="Enter total sold amount" required>
-
-        <!-- Total Paid Amount -->
-        <label for="totalPaid">Total Paid Amount (Required)</label>
-        <input type="number" id="totalPaid" placeholder="Enter total paid amount" required>
-
-        <!-- Most Sold Item Dropdown -->
-        <label for="mostSoldItem">Most Sold Item (Required)</label>
-        <select id="mostSoldItem" required>
-            <option value="" disabled selected>Select Most Sold Item</option>
-            <option value="biryani">Biryani</option>
-            <option value="kacchi">Kacchi</option>
-            <option value="Beef Curry">Beef Curry</option>
-            <option value="Meat Curry">Meat Curry</option>
-            <option value="Burger">Burger</option>
-            <option value="Pizza">Pizza</option>
-            <option value="Barista">Barista</option>
-            <option value="Chicken Biryani">Chicken Biryani</option>
-            <option value="Mutton Biryani">Mutton Biryani</option>
-            <option value="Sweets">Sweets</option>
+        <label for="foodQuality" id="label-foodQuality">How would you rate the quality of the food?</label>
+        <select id="foodQuality" name="foodQuality" required>
+            <option value="">Select Rating</option>
+            <option value="Excellent">Excellent</option>
+            <option value="Good">Good</option>
+            <option value="Average">Average</option>
+            <option value="Poor">Poor</option>
+            <option value="Very Poor">Very Poor</option>
         </select>
 
-        <!-- Additional Remarks -->
-        <label for="remarks">Additional Remarks (Optional)</label>
-        <textarea id="remarks" placeholder="Any extra comments..."></textarea>
+        <label for="mealSatisfaction" id="label-mealSatisfaction">Was your meal prepared to your satisfaction?</label>
+        <select id="mealSatisfaction" name="mealSatisfaction" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
 
-        <!-- Submit Button -->
-        <button type="submit">Submit Report</button>
+        <label for="servedOnTime" id="label-servedOnTime">Was the food served on time?</label>
+        <select id="servedOnTime" name="servedOnTime" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="portion" id="label-portion">Were the portion sizes and pricing reasonable?</label>
+        <select id="portion" name="portion" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="comments" id="label-comments">Any comments about pricing, portion sizes, or improvements?</label>
+        <textarea id="comments" name="comments"></textarea>
+
+        <button type="submit" id="submit-button">Submit Feedback</button>
     </form>
 
     <script>
-        document.getElementById("salesForm").addEventListener("submit", function(event) {
+        function toggleLanguage(lang) {
+            const translations = {
+                en: {
+                    "form-title": "Customer Feedback - Heaven's Kitchen",
+                    "submit-button": "Submit Feedback"
+                },
+                bn: {
+                    "form-title": "গ্রাহক প্রতিক্রিয়া - হেভেন'স কিচেন",
+                    "submit-button": "প্রতিক্রিয়া জমা দিন"
+                }
+            };
+            
+            document.getElementById('form-title').innerText = translations[lang]['form-title'];
+            document.getElementById('submit-button').innerText = translations[lang]['submit-button'];
+        }
+
+        document.getElementById("feedbackForm").addEventListener("submit", function(event) {
             event.preventDefault();
             
             let formData = {
-                staffName: document.getElementById("staffName").value,
-                numCustomers: document.getElementById("numCustomers").value,
-                totalSold: document.getElementById("totalSold").value,
-                totalPaid: document.getElementById("totalPaid").value,
-                mostSoldItem: document.getElementById("mostSoldItem").value,
-                remarks: document.getElementById("remarks").value
+                name: document.getElementById("name").value,
+                contact: document.getElementById("contact").value,
+                email: document.getElementById("email").value,
+                rating: document.getElementById("rating").value,
+                foodQuality: document.getElementById("foodQuality").value,
+                mealSatisfaction: document.getElementById("mealSatisfaction").value,
+                servedOnTime: document.getElementById("servedOnTime").value,
+                portion: document.getElementById("portion").value,
+                comments: document.getElementById("comments").value
             };
 
-            fetch("https://script.google.com/macros/s/AKfycbx8jM3rXjqxjJFIRg4mFWhXYMafjx_pJw9PWdQKnMjXKF-rF-uq58bz4JL9uSwD6Ant-Q/exec", {
+            fetch("https://script.google.com/macros/s/AKfycbyCHbI1VsGgBBHPELyhD6-T2AONvR5khfF5NSbj3Ax1Fv-ChLo9FDOhWbgHpkua1SsU/exec", {
                 method: "POST",
                 mode: "no-cors",
                 headers: {
@@ -117,10 +147,9 @@
                 },
                 body: JSON.stringify(formData)
             })
-            .then(() => alert("Sales report submitted successfully!"))
+            .then(() => alert("Feedback submitted successfully!"))
             .catch(error => alert("Error: " + error));
         });
     </script>
-
 </body>
 </html>
