@@ -17,7 +17,7 @@
         h2 {
             text-align: center;
             font-weight: 600;
-            color: #5c6bc0; /* Calming blue-violet for header */
+            color: #5c6bc0;
             margin-bottom: 20px;
         }
 
@@ -25,7 +25,7 @@
             background: #ffffff;
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* More noticeable shadow */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             max-width: 600px;
             margin: 20px auto;
         }
@@ -47,7 +47,7 @@
         }
 
         input:focus, textarea:focus, select:focus {
-            border-color: #5c6bc0; /* Match the header color for focus */
+            border-color: #5c6bc0;
             box-shadow: 0 0 6px rgba(92, 107, 192, 0.3);
         }
 
@@ -91,7 +91,6 @@
             margin-bottom: 20px;
         }
 
-        /* Adding a gradient background theme */
         body::before {
             content: "";
             position: fixed;
@@ -134,27 +133,31 @@
         <label for="rating" id="label-rating">How would you rate your overall dining experience today?</label>
         <select id="rating" name="rating" required>
             <option value="">Select Rating</option>
-            <option value="Excellent">Excellent</option>
-            <option value="Good">Good</option>
+            <option value="Extraordinary">Extraordinary</option>
+            <option value="Satisfactory">Satisfactory</option>
+            <option value="Below Satisfactory">Below Satisfactory</option>
             <option value="Average">Average</option>
-            <option value="Poor">Poor</option>
-            <option value="Very Poor">Very Poor</option>
+            <option value="Below Average">Below Average</option>
         </select>
 
         <label for="foodQuality" id="label-foodQuality">How would you rate the quality of the food?</label>
         <select id="foodQuality" name="foodQuality" required>
             <option value="">Select Rating</option>
-            <option value="Excellent">Excellent</option>
-            <option value="Good">Good</option>
+            <option value="Extraordinary">Extraordinary</option>
+            <option value="Satisfactory">Satisfactory</option>
+            <option value="Below Satisfactory">Below Satisfactory</option>
             <option value="Average">Average</option>
-            <option value="Poor">Poor</option>
-            <option value="Very Poor">Very Poor</option>
+            <option value="Below Average">Below Average</option>
         </select>
 
         <label for="mealSatisfaction" id="label-mealSatisfaction">Was your meal prepared to your satisfaction?</label>
         <select id="mealSatisfaction" name="mealSatisfaction" required>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
+            <option value="">Select Rating</option>
+            <option value="Extraordinary">Extraordinary</option>
+            <option value="Satisfactory">Satisfactory</option>
+            <option value="Below Satisfactory">Below Satisfactory</option>
+            <option value="Average">Average</option>
+            <option value="Below Average">Below Average</option>
         </select>
 
         <label for="servedOnTime" id="label-servedOnTime">Was the food served on time?</label>
