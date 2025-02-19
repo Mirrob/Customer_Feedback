@@ -8,66 +8,99 @@
     <style>
         body {
             font-family: 'Open Sans', Arial, sans-serif;
-            background-color: #f9f9f9;
-            max-width: 800px;
-            margin: 30px auto;
-            padding: 20px;
+            background-color: #f8f9fa;
             color: #333;
+            margin: 0;
+            padding: 20px;
         }
+
         h2 {
             text-align: center;
             font-weight: 600;
-            color: #2c3e50;
+            color: #5c6bc0; /* Calming blue-violet for header */
+            margin-bottom: 20px;
         }
+
         form {
-            background: white;
+            background: #ffffff;
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* More noticeable shadow */
+            max-width: 600px;
+            margin: 20px auto;
         }
+
         label {
             font-weight: 600;
-            margin-top: 15px;
             display: block;
+            margin-bottom: 8px;
         }
+
         select, input, textarea, button {
             width: 100%;
             padding: 12px;
-            margin-top: 8px;
             margin-bottom: 20px;
-            border: 1px solid #ccc;
+            border: 1px solid #dcdde1;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 15px;
+            box-sizing: border-box;
         }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: #5c6bc0; /* Match the header color for focus */
+            box-shadow: 0 0 6px rgba(92, 107, 192, 0.3);
+        }
+
         button {
-            background-color: #3498db;
-            color: white;
+            background-color: #5c6bc0;
+            color: #fff;
             border: none;
             cursor: pointer;
             font-weight: 600;
-            transition: background-color 0.3s;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
         }
+
         button:hover {
-            background-color: #2980b9;
+            background-color: #3949ab;
+            transform: translateY(-2px);
         }
+
         select, input, textarea {
             background-color: #fafafa;
         }
+
         textarea {
             resize: none;
-            height: 100px;
+            height: 120px;
         }
-        .container {
-            padding: 10px;
-        }
-        .container div {
-            margin-bottom: 20px;
-        }
+
         .note {
             font-size: 14px;
             color: #777;
-            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        .container div {
             margin-bottom: 20px;
+        }
+
+        /* Adding a gradient background theme */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom right, #f0f4f8, #d7dee5);
+            z-index: -1;
         }
     </style>
 </head>
