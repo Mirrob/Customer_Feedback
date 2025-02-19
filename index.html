@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Feedback - Heaven's Kitchen</title>
+    <title id="page-title">Customer Feedback - Heaven's Kitchen</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -111,20 +111,43 @@
         function toggleLanguage(lang) {
             const translations = {
                 en: {
+                    "page-title": "Customer Feedback - Heaven's Kitchen",
                     "form-title": "Customer Feedback - Heaven's Kitchen",
-                    "submit-button": "Submit Feedback"
+                    "submit-button": "Submit Feedback",
+                    "label-name": "Your Name (Required)",
+                    "label-contact": "Phone Number (Required)",
+                    "label-email": "Email Address (Optional)",
+                    "label-rating": "How would you rate your overall dining experience today?",
+                    "label-foodQuality": "How would you rate the quality of the food?",
+                    "label-mealSatisfaction": "Was your meal prepared to your satisfaction?",
+                    "label-servedOnTime": "Was the food served on time?",
+                    "label-portion": "Were the portion sizes and pricing reasonable?",
+                    "label-comments": "Any comments about pricing, portion sizes, or improvements?"
                 },
                 bn: {
+                    "page-title": "গ্রাহক প্রতিক্রিয়া - হেভেন'স কিচেন",
                     "form-title": "গ্রাহক প্রতিক্রিয়া - হেভেন'স কিচেন",
-                    "submit-button": "প্রতিক্রিয়া জমা দিন"
+                    "submit-button": "প্রতিক্রিয়া জমা দিন",
+                    "label-name": "আপনার নাম (আবশ্যক)",
+                    "label-contact": "ফোন নম্বর (আবশ্যক)",
+                    "label-email": "ইমেইল ঠিকানা (ঐচ্ছিক)",
+                    "label-rating": "আপনি আজকের খাবারের অভিজ্ঞতা কেমন রেট করবেন?",
+                    "label-foodQuality": "আপনি খাবারের গুণমান কেমন রেট করবেন?",
+                    "label-mealSatisfaction": "আপনার খাবার কি আপনার প্রত্যাশা অনুযায়ী প্রস্তুত হয়েছিল?",
+                    "label-servedOnTime": "খাবার কি সময়মতো পরিবেশন করা হয়েছিল?",
+                    "label-portion": "পরিমাণ এবং মূল্য নির্ধারণ যথাযথ ছিল?",
+                    "label-comments": "মূল্য নির্ধারণ বা পরিমাণ সম্পর্কে আপনার কোন মতামত বা উন্নতির জন্য অতিরিক্ত কিছু আছে?"
                 }
             };
             
-            document.getElementById('form-title').innerText = translations[lang]['form-title'];
-            document.getElementById('submit-button').innerText = translations[lang]['submit-button'];
+            document.querySelectorAll("[id]").forEach(element => {
+                const key = element.id;
+                if (translations[lang][key]) {
+                    element.innerText = translations[lang][key];
+                }
+            });
         }
-
-        document.getElementById("feedbackForm").addEventListener("submit", function(event) {
+      document.getElementById("feedbackForm").addEventListener("submit", function(event) {
             event.preventDefault();
             
             let formData = {
