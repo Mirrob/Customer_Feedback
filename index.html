@@ -4,70 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">Customer Feedback - Heaven's Kitchen</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Open Sans', Arial, sans-serif;
-            background-color: #f9f9f9;
-            max-width: 800px;
-            margin: 30px auto;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9; /* Light gray-blue background */
+            color: #333; /* Darker text for readability */
+            margin: 0;
             padding: 20px;
-            color: #333;
+            line-height: 1.6;
         }
+
         h2 {
             text-align: center;
-            font-weight: 600;
-            color: #2c3e50;
+            color: #2c3e50; /* Dark blue-gray for the header */
         }
+
         form {
-            background: white;
+            background: #ffffff; /* Pure white for contrast */
             padding: 30px;
+            margin: 20px auto;
             border-radius: 10px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            max-width: 600px;
         }
+
         label {
-            font-weight: 600;
-            margin-top: 15px;
+            font-weight: bold;
+            margin-top: 10px;
             display: block;
         }
-        select, input, textarea, button {
+
+        input, select, textarea, button {
             width: 100%;
             padding: 12px;
-            margin-top: 8px;
+            margin-top: 10px;
             margin-bottom: 20px;
-            border: 1px solid #ccc;
+            border: 1px solid #ddd;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 14px;
+            box-sizing: border-box;
         }
+
         button {
-            background-color: #3498db;
-            color: white;
+            background-color: #3498db; /* Blue color for the button */
+            color: #fff;
             border: none;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: bold;
             transition: background-color 0.3s;
         }
+
         button:hover {
-            background-color: #2980b9;
+            background-color: #2980b9; /* Darker blue on hover */
         }
+
         select, input, textarea {
-            background-color: #fafafa;
+            background-color: #f9f9f9; /* Slightly off-white for inputs */
         }
+
         textarea {
-            resize: none;
+            resize: vertical;
             height: 100px;
         }
+
         .container {
             padding: 10px;
         }
+
         .container div {
             margin-bottom: 20px;
         }
-        .note {
-            font-size: 14px;
-            color: #777;
-            margin-top: -10px;
-            margin-bottom: 20px;
+
+        /* Optional: You could add a subtle background image */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://via.placeholder.com/1920x1080.png') no-repeat center center/cover;
+            opacity: 0.1;
+            z-index: -1;
         }
     </style>
 </head>
@@ -75,28 +93,23 @@
 
     <h2 id="form-title">Customer Feedback - Heaven's Kitchen</h2>
     
-    <div class="container">
-        <div>
-            <label for="language">Select Language:</label>
-            <select id="language" onchange="toggleLanguage(this.value)">
-                <option value="en">English</option>
-                <option value="bn">বাংলা</option>
-            </select>
-        </div>
+    <div>
+        <label for="language">Select Language:</label>
+        <select id="language" onchange="toggleLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="bn">বাংলা</option>
+        </select>
     </div>
     
     <form id="feedbackForm">
         <label for="name" id="label-name">Your Name (Required)</label>
         <input type="text" id="name" name="name" required>
-        <div class="note">Please enter your full name.</div>
 
         <label for="contact" id="label-contact">Phone Number (Required)</label>
         <input type="text" id="contact" name="contact" required>
-        <div class="note">Your number will only be used for feedback purposes.</div>
 
         <label for="email" id="label-email">Email Address (Optional)</label>
         <input type="email" id="email" name="email">
-        <div class="note">Enter your email if you’d like a follow-up response.</div>
 
         <label for="rating" id="label-rating">How would you rate your overall dining experience today?</label>
         <select id="rating" name="rating" required>
@@ -182,8 +195,7 @@
                 }
             });
         }
-
-        document.getElementById("feedbackForm").addEventListener("submit", function(event) {
+      document.getElementById("feedbackForm").addEventListener("submit", function(event) {
             event.preventDefault();
             
             let formData = {
@@ -198,16 +210,16 @@
                 comments: document.getElementById("comments").value
             };
 
-            // Make sure to replace this URL with the correct one from your Apps Script deployment
-            const scriptURL = "https://script.google.com/macros/s/AKfycbw3bgPhG6AIMrrc8hrA-eJQxGb2bMxjDG7VGkFLChRgG7Ct-pKNbqqV3Y2UV_T8GVGARw/exec";
-
-            fetch(scriptURL, {
+            fetch("https://script.google.com/macros/s/AKfycbyCHbI1VsGgBBHPELyhD6-T2AONvR5khfF5NSbj3Ax1Fv-ChLo9FDOhWbgHpkua1SsU/exec", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "application/json"
+                },
                 body: JSON.stringify(formData)
             })
             .then(() => alert("Feedback submitted successfully!"))
-            .catch(error => alert("Error submitting feedback: " + error.message));
+            .catch(error => alert("Error: " + error));
         });
     </script>
 </body>
