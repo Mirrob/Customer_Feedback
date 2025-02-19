@@ -198,16 +198,16 @@
                 comments: document.getElementById("comments").value
             };
 
-            fetch("https://script.google.com/macros/s/AKfycbyCHbI1VsGgBBHPELyhD6-T2AONvR5khfF5NSbj3Ax1Fv-ChLo9FDOhWbgHpkua1SsU/exec", {
+            // Make sure to replace this URL with the correct one from your Apps Script deployment
+            const scriptURL = "https://script.google.com/macros/s/AKfycbyCHbI1VsGgBBHPELyhD6-T2AONvR5khfF5NSbj3Ax1Fv-ChLo9FDOhWbgHpkua1SsU/exec";
+
+            fetch(scriptURL, {
                 method: "POST",
-                mode: "no-cors",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData)
             })
             .then(() => alert("Feedback submitted successfully!"))
-            .catch(error => alert("Error: " + error));
+            .catch(error => alert("Error submitting feedback: " + error.message));
         });
     </script>
 </body>
